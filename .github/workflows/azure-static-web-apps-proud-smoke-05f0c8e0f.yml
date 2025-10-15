@@ -1,4 +1,4 @@
-name: Azure Static Web Apps CI/CD
+name: 🚀 Tienda de Motos - Azure Static Web Apps CI/CD
 
 on:
   push:
@@ -13,34 +13,40 @@ jobs:
   build_and_deploy_job:
     if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
     runs-on: ubuntu-latest
-    name: Build and Deploy Job
+    name: 🏍️ Compilar y Desplegar Tienda de Motos
     steps:
+      # ✅ 1. Descargar el código del repositorio
       - uses: actions/checkout@v3
         with:
           submodules: true
           lfs: false
-      - name: Build And Deploy
+
+      # ✅ 2. Compilar y desplegar la tienda en Azure Static Web Apps
+      - name: 📦 Construir y Desplegar en Azure
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
         with:
-          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_PROUD_SMOKE_05F0C8E0F }}
-          repo_token: ${{ secrets.GITHUB_TOKEN }} # Used for Github integrations (i.e. PR comments)
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_TIENDA_MOTOS }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }} # Token de GitHub para PRs y comentarios
           action: "upload"
-          ###### Repository/Build Configurations - These values can be configured to match your app requirements. ######
-          # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
-          app_location: "/" # App source code path
-          api_location: "" # Api source code path - optional
-          output_location: "build" # Built app content directory - optional
-          ###### End of Repository/Build Configurations ######
+
+          ###### Configuración del proyecto ######
+          # Ruta del código fuente de tu tienda de motos
+          app_location: "/" # Si tu app está en una carpeta, cámbiala (por ejemplo: "frontend")
+          # Ruta de API si usas backend (puedes dejar vacío)
+          api_location: "" 
+          # Carpeta donde se genera la versión final lista para desplegar
+          output_location: "build"
+          ###### Fin de configuración ######
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
     runs-on: ubuntu-latest
-    name: Close Pull Request Job
+    name: 🔒 Cerrar Pull Request de Tienda de Motos
     steps:
-      - name: Close Pull Request
+      - name: Cerrar Pull Request en Azure
         id: closepullrequest
         uses: Azure/static-web-apps-deploy@v1
         with:
-          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_PROUD_SMOKE_05F0C8E0F }}
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_TIENDA_MOTOS }}
           action: "close"
